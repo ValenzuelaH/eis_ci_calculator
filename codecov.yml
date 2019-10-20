@@ -3,14 +3,32 @@ codecov:
   require_ci_to_pass: yes
 
 coverage:
+  range: 70..100
   precision: 2
   round: down
-  range: "70...100"
-
   status:
-    project: yes
-    patch: yes
-    changes: no
+    project:
+      default:
+        # basic
+        target: auto
+        threshold: null
+        base: auto
+        # advanced
+        branches: null
+        if_no_uploads: error
+        if_not_found: success
+        if_ci_failed: error
+        only_pulls: false
+        flags: null
+        paths: null
+        status:
+          project:
+            default: false  # disable the default status that measures entire project
+            tests:  # declare a new status context "tests"
+              target: 100%  # we always want 100% coverage here
+              paths: "tests/"  # only include coverage in "tests/" folder
+            app:  # declare a new status context "app"
+              paths: "!tests/"  # remove all files in "tests/"
 
 parsers:
   gcov:
@@ -21,23 +39,12 @@ parsers:
       macro: no
 
 comment:
-  layout: "reach,diff,flags,tree"
+  layout: reach, diff, flags, files
   behavior: default
-  require_changes: no
+  require_changes: false  # if true: only post the comment if coverage changes
+  require_base: no        # [yes :: must have a base report to post]
+  require_head: yes       # [yes :: must have a head report to post]
+  branches: null          # branch names that can post comment
+  after_n_builds: <number> #e.g., 5. The number of uploaded reports codecov will receive before posting a comment on a pull request.
 
-# Team Yaml
-coverage:
-  round: down
-  precision: 5
-
-# Repository Yaml
-coverage:
-  round: up
-  range: 0..10
-
-# Used in Codecov after updating
-coverage:
-  round: up
-  range: 0..10
-  precision: 5
 
