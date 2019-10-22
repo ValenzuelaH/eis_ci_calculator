@@ -4,6 +4,16 @@ import java.math.MathContext;
 import java.math.*;
 
 public class Calculator {
+    private int memory = 0;
+
+    public int memory(){
+        return memory;
+    }
+
+    public void remember(int x){
+        memory = x;
+    }
+
     public static int add(int a, int b) {
         return a + b;
     }
@@ -22,12 +32,15 @@ public class Calculator {
         return res;
     }
 
-  
     public static int inverse(int x) {
         return (1/x);
     }
 
-    public static int subtract(int a, int b){ return a - b;}
+    public int subtract(int a, int b){
+        int res = a - b;
+        this.remember(res);
+        return res;
+    }
 
     public static Double Log(Double x) {
         return Math.log10(x);
