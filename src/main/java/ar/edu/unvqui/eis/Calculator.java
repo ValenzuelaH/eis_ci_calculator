@@ -8,6 +8,8 @@ public class Calculator {
         return a + b;
     }
 
+    public static int zero(){return 0;}
+
     public static double root(int a) {return Math.sqrt(a);}
 
     public static int mult(int a, int b) {
