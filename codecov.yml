@@ -1,8 +1,9 @@
 codecov:
- notify:
+ notify: yes
  require_ci_to_pass: yes
   ci:
     - travis
+ bot: valenzuelah
 
 status:
  project: yes
